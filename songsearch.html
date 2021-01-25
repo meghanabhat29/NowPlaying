@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h2>Select Query</h2>
+        <h2>Select Years</h2>
         <form action="/songsearch" method = "POST">
             <label for="minyear">From year:</label><br>
             <input type="number" id="minyearId" name="minyear" value="1988">
@@ -13,9 +13,9 @@
         </form>
         <br>
 
-{{if.}}
+    {{if .}}
     <ul>
-    {{range.}}
+    {{range .}}
         <li>Id: {{.Id}}</li>
         <li>Name: {{.Name}}</li>
         <li>Artist: {{.Artist}} </li>
