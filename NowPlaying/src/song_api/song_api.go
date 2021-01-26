@@ -121,18 +121,6 @@ func Update(response http.ResponseWriter, request *http.Request) {
 	}
 }
 
-func respondWithError(w http.ResponseWriter, code int, msg string) {
-	respondWithJson(w, code, map[string]string{"error": msg})
-}
-
-func respondWithJson(w http.ResponseWriter, code int, s interface{}) {
-	response, _ := json.Marshal(s)
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
-	w.Write(response)
-
-}
-
 //Delete ...
 func Delete(response http.ResponseWriter, request *http.Request) {
 
@@ -146,12 +134,26 @@ func Delete(response http.ResponseWriter, request *http.Request) {
 		songModel := models.SongModel{
 			Db: db,
 		}
-		_, err2 := songModel.Delete(id)
+		RowsAffected, err2 := songModel.Delete(id)
 		if err2 != nil {
 			respondWithError(response, http.StatusBadRequest, err2.Error())
 		} else {
-			respondWithJson(response, http.StatusOK, nil)
+			respondWithJson(response, http.StatusOK, map[string]int64{
+				"Rows affected: ": RowsAffected,
+			})
 
 		}
 	}
+}
+
+func respondWithError(w http.ResponseWriter, code int, msg string) {
+	respondWithJson(w, code, map[string]string{"error": msg})
+}
+
+func respondWithJson(w http.ResponseWriter, code int, s interface{}) {
+	response, _ := json.Marshal(s)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+	w.Write(response)
+
 }
