@@ -52,31 +52,6 @@ func Search(response http.ResponseWriter, request *http.Request) {
 	}
 }
 
-//SearchYear ...
-/*func SearchYear(response http.ResponseWriter, request *http.Request) {
-
-	vars := mux.Vars(request)
-	smin := vars["min"]
-	smax := vars["max"]
-	min, _ := strconv.ParseInt(smin, 64, 64)
-	max, _ := strconv.ParseInt(smax, 64, 64)
-	db, err := config.GetDB()
-	if err != nil {
-		respondWithError(response, http.StatusBadRequest, err.Error())
-	} else {
-		songModel := models.SongModel{
-			Db: db,
-		}
-		songs, err2 := songModel.SearchYear(min, max)
-		if err2 != nil {
-			respondWithError(response, http.StatusBadRequest, err2.Error())
-		} else {
-			respondWithJson(response, http.StatusOK, songs)
-
-		}
-	}
-}*/
-
 //Create ...
 func Create(response http.ResponseWriter, request *http.Request) {
 
