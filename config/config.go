@@ -19,7 +19,7 @@ func Setupconnection() {
 	var err error
 	connection.cluster = gocql.NewCluster("127.0.0.1")
 	connection.cluster.Consistency = gocql.Quorum
-	connection.cluster.Keyspace = "/home/meghanar/cassandra/apache-cassandra-3.11.10/data/data/playlist"
+	connection.cluster.Keyspace = "playlist"
 	connection.session, err = connection.cluster.CreateSession()
 	if err != nil {
 		log.Println(err)
